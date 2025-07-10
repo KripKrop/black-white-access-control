@@ -81,7 +81,7 @@ const Dashboard = () => {
         <div className="col-12">
           <div className="d-flex justify-content-between align-items-center mb-4">
             <div>
-              <h1 className="h3 fw-bold">Super Admin Dashboard</h1>
+              <h1 className="h3 fw-bold">Sensia Systems</h1>
               <p className="text-muted">Welcome back, {user?.email}</p>
             </div>
             <button
@@ -141,21 +141,6 @@ const Dashboard = () => {
                     </div>
                     <div className="bg-dark text-white rounded p-3">
                       <i className="bi bi-person fs-4"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="card border-0 shadow-sm">
-                <div className="card-body">
-                  <div className="d-flex align-items-center">
-                    <div className="flex-grow-1">
-                      <p className="text-muted mb-1">Active Sessions</p>
-                      <h4 className="mb-0">{users.filter(u => u.last_login).length}</h4>
-                    </div>
-                    <div className="bg-dark text-white rounded p-3">
-                      <i className="bi bi-activity fs-4"></i>
                     </div>
                   </div>
                 </div>

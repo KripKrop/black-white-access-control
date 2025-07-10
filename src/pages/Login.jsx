@@ -78,7 +78,7 @@ const Login = () => {
             <div className="card shadow border-0">
               <div className="card-body p-5">
                 <div className="text-center mb-4">
-                  <h1 className="h3 fw-bold">Super Admin Dashboard</h1>
+                  <h1 className="h3 fw-bold">Sensia Systems</h1>
                   <p className="text-muted">Sign in to your account</p>
                 </div>
 

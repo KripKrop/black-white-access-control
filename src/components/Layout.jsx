@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
         <div className="container-fluid">
           <Link className="navbar-brand fw-bold" to={user?.is_superuser ? "/dashboard" : "/profile"}>
-            Super Admin Dashboard
+            Sensia Systems
           </Link>
 
           <button 

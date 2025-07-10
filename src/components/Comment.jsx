@@ -9,8 +9,8 @@ const Comment = ({ comment, onEdit, onDelete, showHistory = false }) => {
     return new Date(dateString).toLocaleString();
   };
 
-  const canEdit = comment.user === user?.email || user?.is_superuser;
-  const canDelete = comment.user === user?.email || user?.is_superuser;
+  const canEdit = (comment.user === user?.email && onEdit) || user?.is_superuser;
+  const canDelete = (comment.user === user?.email && onDelete) || user?.is_superuser;
 
   const historyTooltip = showHistory && comment.history && comment.history.length > 0 && (
     <div 
