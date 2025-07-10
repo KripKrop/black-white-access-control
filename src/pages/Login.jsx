@@ -37,14 +37,15 @@ const Login = () => {
       // Decode JWT to get user info
       const payload = JSON.parse(atob(access.split('.')[1]));
       console.log('JWT payload:', payload); // Debug log
+      console.log('API response data:', response.data); // Debug log
       
       const userData = {
         id: payload.user_id,
         email: payload.email,
         is_superuser: response.data.is_superuser || false,
-        username: payload.username || formData.email.split('@')[0],
-        first_name: payload.first_name || '',
-        last_name: payload.last_name || ''
+        username: response.data.username || payload.username || formData.email.split('@')[0],
+        first_name: response.data.first_name || payload.first_name || '',
+        last_name: response.data.last_name || payload.last_name || ''
       };
 
       console.log('User data being passed to login:', userData); // Debug log
