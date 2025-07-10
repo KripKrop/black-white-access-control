@@ -20,8 +20,10 @@ const CommentSection = ({ pageName }) => {
   const fetchComments = async () => {
     try {
       setLoading(true);
-      const response = await commentAPI.getComments({ page: pageName });
-      setComments(response.data);
+      const response = await commentAPI.getComments();
+      // Filter comments by page name since API returns all comments
+      const pageComments = response.data.filter(comment => comment.page === pageName);
+      setComments(pageComments);
     } catch (error) {
       setError('Failed to load comments');
       console.error('Error fetching comments:', error);

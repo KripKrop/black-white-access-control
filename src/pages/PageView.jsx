@@ -81,55 +81,6 @@ const PageView = () => {
             </div>
           </div>
 
-          {/* Page-specific Content */}
-          <div className="row mb-4">
-            <div className="col-md-6">
-              <div className="card border-0 shadow-sm h-100">
-                <div className="card-body">
-                  <h6 className="card-title">Quick Actions</h6>
-                  <div className="d-grid gap-2">
-                    {hasPermission(page.name, 'create') && (
-                      <button className="btn btn-outline-dark" disabled>
-                        <i className="bi bi-plus-circle me-2"></i>
-                        Add New Item (Demo)
-                      </button>
-                    )}
-                    {hasPermission(page.name, 'edit') && (
-                      <button className="btn btn-outline-dark" disabled>
-                        <i className="bi bi-pencil me-2"></i>
-                        Edit Items (Demo)
-                      </button>
-                    )}
-                    <button className="btn btn-outline-dark" disabled>
-                      <i className="bi bi-download me-2"></i>
-                      Export Data (Demo)
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="card border-0 shadow-sm h-100">
-                <div className="card-body">
-                  <h6 className="card-title">Page Statistics</h6>
-                  <div className="row text-center">
-                    <div className="col-4">
-                      <div className="fw-bold fs-4">0</div>
-                      <small className="text-muted">Items</small>
-                    </div>
-                    <div className="col-4">
-                      <div className="fw-bold fs-4">0</div>
-                      <small className="text-muted">Active</small>
-                    </div>
-                    <div className="col-4">
-                      <div className="fw-bold fs-4">0</div>
-                      <small className="text-muted">Pending</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           {/* Comments Section */}
           <div className="card border-0 shadow-sm">
