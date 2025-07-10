@@ -4,8 +4,6 @@ import { useAuth } from '../context/AuthContext';
 const Comment = ({ comment, onEdit, onDelete, showHistory = false }) => {
   const { user } = useAuth();
   const [showTooltip, setShowTooltip] = useState(false);
-  
-  console.log('Comment props:', { commentId: comment.id, onEdit: !!onEdit, onDelete: !!onDelete, user: user?.email, commentUser: comment.user });
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleString();

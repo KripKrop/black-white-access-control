@@ -99,8 +99,6 @@ const CommentSection = ({ pageName }) => {
   const canCreate = hasPermission(pageName, 'create');
   const canEdit = hasPermission(pageName, 'edit');
   const canDelete = hasPermission(pageName, 'delete');
-  
-  console.log('CommentSection permissions:', { pageName, canView, canCreate, canEdit, canDelete });
 
   if (!canView) {
     return (

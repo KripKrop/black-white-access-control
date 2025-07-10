@@ -41,7 +41,7 @@ const Login = () => {
       
       const userData = {
         id: payload.user_id,
-        email: payload.email,
+        email: payload.email || formData.email, // Use email from form if not in JWT
         is_superuser: response.data.is_superuser || false,
         username: response.data.username || payload.username || formData.email.split('@')[0],
         first_name: response.data.first_name || payload.first_name || '',
