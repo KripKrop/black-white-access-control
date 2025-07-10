@@ -155,6 +155,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (tokens, userData) => {
+    console.log('AuthContext login called with userData:', userData); // Debug log
     tokenManager.setTokens(tokens);
     
     let permissions = [];
@@ -165,8 +166,11 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error('Failed to fetch permissions:', error);
       }
+    } else {
+      console.log('User is superuser, skipping permission fetch'); // Debug log
     }
 
+    console.log('Dispatching LOGIN_SUCCESS with:', { user: userData, permissions }); // Debug log
     dispatch({
       type: 'LOGIN_SUCCESS',
       payload: { user: userData, permissions }

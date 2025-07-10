@@ -9,6 +9,9 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Debug log to check user state
+  console.log('Layout - current user:', user);
+
   useEffect(() => {
     const fetchPages = async () => {
       const pages = await getAccessiblePages();

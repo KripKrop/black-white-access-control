@@ -36,6 +36,8 @@ const Login = () => {
       
       // Decode JWT to get user info
       const payload = JSON.parse(atob(access.split('.')[1]));
+      console.log('JWT payload:', payload); // Debug log
+      
       const userData = {
         id: payload.user_id,
         email: payload.email,
@@ -45,9 +47,12 @@ const Login = () => {
         last_name: payload.last_name || ''
       };
 
+      console.log('User data being passed to login:', userData); // Debug log
+
       await login({ access, refresh }, userData);
       
       // Redirect based on role
+      console.log('Redirecting user - is_superuser:', userData.is_superuser); // Debug log
       if (userData.is_superuser) {
         navigate('/dashboard');
       } else {
