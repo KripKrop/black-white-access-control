@@ -101,35 +101,35 @@ const Dashboard = () => {
       )}
 
       {/* Statistics Cards */}
-      <div className="flex justify-center mb-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl w-full">
-          <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
+      <div className="mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <Card className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
             <CardContent className="p-8 text-center">
-              <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <Users className="h-8 w-8 text-primary" />
+              <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
+                <Users className="h-10 w-10 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold mb-2">{users.length}</h3>
-              <p className="text-muted-foreground font-medium">Total Users</p>
+              <h3 className="text-4xl font-bold mb-3 text-foreground">{users.length}</h3>
+              <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Total Users</p>
             </CardContent>
           </Card>
           
-          <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
+          <Card className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
             <CardContent className="p-8 text-center">
-              <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <Shield className="h-8 w-8 text-primary" />
+              <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
+                <Shield className="h-10 w-10 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold mb-2">{users.filter(u => u.is_superuser).length}</h3>
-              <p className="text-muted-foreground font-medium">Super Admins</p>
+              <h3 className="text-4xl font-bold mb-3 text-foreground">{users.filter(u => u.is_superuser).length}</h3>
+              <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Super Admins</p>
             </CardContent>
           </Card>
           
-          <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/20">
+          <Card className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
             <CardContent className="p-8 text-center">
-              <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <User className="h-8 w-8 text-primary" />
+              <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
+                <User className="h-10 w-10 text-primary" />
               </div>
-              <h3 className="text-3xl font-bold mb-2">{users.filter(u => !u.is_superuser).length}</h3>
-              <p className="text-muted-foreground font-medium">Regular Users</p>
+              <h3 className="text-4xl font-bold mb-3 text-foreground">{users.filter(u => !u.is_superuser).length}</h3>
+              <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Regular Users</p>
             </CardContent>
           </Card>
         </div>
