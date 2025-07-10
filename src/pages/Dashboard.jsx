@@ -67,101 +67,86 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="d-flex justify-content-center align-items-center min-vh-100">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
       </div>
     );
   }
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <div>
-              <h1 className="h3 fw-bold">Sensia Systems</h1>
-              <p className="text-muted">Welcome back, {user?.email}</p>
-            </div>
-            <button
-              className="btn btn-dark"
-              onClick={handleCreateUser}
-            >
-              <i className="bi bi-plus-circle me-2"></i>
-              Add New User
-            </button>
-          </div>
+    <div className="container-fluid px-6 py-8">
+      {/* Header Section */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div className="space-y-1">
+          <h1 className="text-3xl font-bold text-foreground">Sensia Systems</h1>
+          <p className="text-muted-foreground">Welcome back, {user?.email}</p>
+        </div>
+        <button
+          className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-lg font-medium transition-colors shadow-sm"
+          onClick={handleCreateUser}
+        >
+          <i className="bi bi-plus-circle"></i>
+          Add New User
+        </button>
+      </div>
 
-          {error && (
-            <div className="alert alert-danger" role="alert">
-              {error}
-            </div>
-          )}
+      {error && (
+        <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg mb-6">
+          {error}
+        </div>
+      )}
 
-          {/* Statistics Cards */}
-          <div className="row mb-4">
-            <div className="col-md-3">
-              <div className="card border-0 shadow-sm">
-                <div className="card-body">
-                  <div className="d-flex align-items-center">
-                    <div className="flex-grow-1">
-                      <p className="text-muted mb-1">Total Users</p>
-                      <h4 className="mb-0">{users.length}</h4>
-                    </div>
-                    <div className="bg-dark text-white rounded p-3">
-                      <i className="bi bi-people fs-4"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {/* Statistics Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex items-center justify-between">
+            <div className="space-y-2">
+              <p className="text-muted-foreground text-sm font-medium">Total Users</p>
+              <h3 className="text-2xl font-bold text-foreground">{users.length}</h3>
             </div>
-            <div className="col-md-3">
-              <div className="card border-0 shadow-sm">
-                <div className="card-body">
-                  <div className="d-flex align-items-center">
-                    <div className="flex-grow-1">
-                      <p className="text-muted mb-1">Super Admins</p>
-                      <h4 className="mb-0">{users.filter(u => u.is_superuser).length}</h4>
-                    </div>
-                    <div className="bg-dark text-white rounded p-3">
-                      <i className="bi bi-shield-check fs-4"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3">
-              <div className="card border-0 shadow-sm">
-                <div className="card-body">
-                  <div className="d-flex align-items-center">
-                    <div className="flex-grow-1">
-                      <p className="text-muted mb-1">Regular Users</p>
-                      <h4 className="mb-0">{users.filter(u => !u.is_superuser).length}</h4>
-                    </div>
-                    <div className="bg-dark text-white rounded p-3">
-                      <i className="bi bi-person fs-4"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="bg-primary text-primary-foreground p-3 rounded-lg">
+              <i className="bi bi-people text-xl"></i>
             </div>
           </div>
-
-          {/* User Role Table */}
-          <div className="card border-0 shadow-sm">
-            <div className="card-header bg-white border-bottom">
-              <h5 className="mb-0">User Permissions & Management</h5>
+        </div>
+        
+        <div className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex items-center justify-between">
+            <div className="space-y-2">
+              <p className="text-muted-foreground text-sm font-medium">Super Admins</p>
+              <h3 className="text-2xl font-bold text-foreground">{users.filter(u => u.is_superuser).length}</h3>
             </div>
-            <div className="card-body p-0">
-              <UserRoleTable
-                users={users}
-                onEditUser={handleEditUser}
-                onDeleteUser={handleDeleteUser}
-                onRefresh={fetchUsers}
-              />
+            <div className="bg-primary text-primary-foreground p-3 rounded-lg">
+              <i className="bi bi-shield-check text-xl"></i>
             </div>
           </div>
+        </div>
+        
+        <div className="bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex items-center justify-between">
+            <div className="space-y-2">
+              <p className="text-muted-foreground text-sm font-medium">Regular Users</p>
+              <h3 className="text-2xl font-bold text-foreground">{users.filter(u => !u.is_superuser).length}</h3>
+            </div>
+            <div className="bg-primary text-primary-foreground p-3 rounded-lg">
+              <i className="bi bi-person text-xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* User Role Table */}
+      <div className="bg-card border border-border rounded-xl shadow-sm">
+        <div className="border-b border-border px-6 py-4">
+          <h5 className="text-lg font-semibold text-foreground">User Permissions & Management</h5>
+        </div>
+        <div className="p-0">
+          <UserRoleTable
+            users={users}
+            onEditUser={handleEditUser}
+            onDeleteUser={handleDeleteUser}
+            onRefresh={fetchUsers}
+          />
         </div>
       </div>
 
