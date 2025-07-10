@@ -41,7 +41,7 @@ const Login = () => {
       const userData = {
         id: payload.user_id,
         email: payload.email,
-        is_superuser: payload.is_superuser || false,
+        is_superuser: response.data.is_superuser || false,
         username: payload.username || formData.email.split('@')[0],
         first_name: payload.first_name || '',
         last_name: payload.last_name || ''
