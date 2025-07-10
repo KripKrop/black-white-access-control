@@ -193,18 +193,23 @@ export const AuthProvider = ({ children }) => {
   };
 
   const hasPermission = (pageName, permission) => {
+    console.log('hasPermission called:', { pageName, permission, user: state.user, permissions: state.permissions });
     if (state.user?.is_superuser) return true;
     
     const pagePermissions = state.permissions.find(p => p.page === pageName);
+    console.log('Found page permissions:', pagePermissions);
     if (!pagePermissions) return false;
     
+    let result;
     switch (permission) {
-      case 'view': return pagePermissions.can_view;
-      case 'edit': return pagePermissions.can_edit;
-      case 'create': return pagePermissions.can_create;
-      case 'delete': return pagePermissions.can_delete;
-      default: return false;
+      case 'view': result = pagePermissions.can_view; break;
+      case 'edit': result = pagePermissions.can_edit; break;
+      case 'create': result = pagePermissions.can_create; break;
+      case 'delete': result = pagePermissions.can_delete; break;
+      default: result = false;
     }
+    console.log('Permission result:', { pageName, permission, result });
+    return result;
   };
 
   const getAccessiblePages = () => {
