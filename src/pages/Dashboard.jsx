@@ -77,18 +77,39 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto">
+    <div style={{ minHeight: '100vh', padding: '24px', backgroundColor: 'hsl(var(--background))' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground">Sensia Systems</h1>
-            <p className="text-muted-foreground text-lg">Welcome back, {user?.email}</p>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          marginBottom: '40px',
+          flexWrap: 'wrap',
+          gap: '16px'
+        }}>
+          <div>
+            <h1 style={{ 
+              fontSize: '2.5rem', 
+              fontWeight: 'bold', 
+              color: 'hsl(var(--foreground))',
+              margin: '0 0 8px 0'
+            }}>
+              Sensia Systems
+            </h1>
+            <p style={{ 
+              color: 'hsl(var(--muted-foreground))', 
+              fontSize: '1.1rem',
+              margin: '0'
+            }}>
+              Welcome back, {user?.email}
+            </p>
           </div>
           <Button
             onClick={handleCreateUser}
             size="lg"
-            className="gap-2 w-fit"
+            className="gap-2"
+            style={{ flexShrink: 0 }}
           >
             <Plus className="h-5 w-5" />
             Add New User
@@ -101,36 +122,142 @@ const Dashboard = () => {
           </div>
         )}
 
-        {/* Statistics Cards - Force single row layout */}
-        <div className="mb-12">
-          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
-            <Card className="flex-1 group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
-              <CardContent className="p-8 text-center">
-                <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
-                  <Users className="h-10 w-10 text-primary" />
+        {/* Statistics Cards - Forced Horizontal Layout */}
+        <div style={{ marginBottom: '48px' }}>
+          <div style={{ 
+            display: 'flex', 
+            gap: '24px',
+            flexWrap: 'wrap'
+          }}>
+            <Card style={{ 
+              flex: '1 1 300px',
+              minWidth: '300px',
+              transition: 'all 0.3s ease',
+              backgroundColor: 'hsl(var(--card))',
+              border: '1px solid hsl(var(--border))'
+            }} 
+            className="group hover:shadow-xl hover:border-primary/30">
+              <CardContent style={{ padding: '32px', textAlign: 'center' }}>
+                <div style={{ 
+                  width: '80px', 
+                  height: '80px', 
+                  backgroundColor: 'hsl(var(--primary) / 0.05)',
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  margin: '0 auto 24px auto',
+                  border: '1px solid hsl(var(--primary) / 0.1)',
+                  transition: 'background-color 0.3s ease'
+                }}>
+                  <Users style={{ width: '40px', height: '40px', color: 'hsl(var(--primary))' }} />
                 </div>
-                <h3 className="text-4xl font-bold mb-3 text-foreground">{users.length}</h3>
-                <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Total Users</p>
+                <h3 style={{ 
+                  fontSize: '2.5rem', 
+                  fontWeight: 'bold', 
+                  margin: '0 0 12px 0',
+                  color: 'hsl(var(--foreground))'
+                }}>
+                  {users.length}
+                </h3>
+                <p style={{ 
+                  color: 'hsl(var(--muted-foreground))', 
+                  fontWeight: '500',
+                  fontSize: '0.875rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  margin: '0'
+                }}>
+                  Total Users
+                </p>
               </CardContent>
             </Card>
             
-            <Card className="flex-1 group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
-              <CardContent className="p-8 text-center">
-                <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
-                  <Shield className="h-10 w-10 text-primary" />
+            <Card style={{ 
+              flex: '1 1 300px',
+              minWidth: '300px',
+              transition: 'all 0.3s ease',
+              backgroundColor: 'hsl(var(--card))',
+              border: '1px solid hsl(var(--border))'
+            }} 
+            className="group hover:shadow-xl hover:border-primary/30">
+              <CardContent style={{ padding: '32px', textAlign: 'center' }}>
+                <div style={{ 
+                  width: '80px', 
+                  height: '80px', 
+                  backgroundColor: 'hsl(var(--primary) / 0.05)',
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  margin: '0 auto 24px auto',
+                  border: '1px solid hsl(var(--primary) / 0.1)',
+                  transition: 'background-color 0.3s ease'
+                }}>
+                  <Shield style={{ width: '40px', height: '40px', color: 'hsl(var(--primary))' }} />
                 </div>
-                <h3 className="text-4xl font-bold mb-3 text-foreground">{users.filter(u => u.is_superuser).length}</h3>
-                <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Super Admins</p>
+                <h3 style={{ 
+                  fontSize: '2.5rem', 
+                  fontWeight: 'bold', 
+                  margin: '0 0 12px 0',
+                  color: 'hsl(var(--foreground))'
+                }}>
+                  {users.filter(u => u.is_superuser).length}
+                </h3>
+                <p style={{ 
+                  color: 'hsl(var(--muted-foreground))', 
+                  fontWeight: '500',
+                  fontSize: '0.875rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  margin: '0'
+                }}>
+                  Super Admins
+                </p>
               </CardContent>
             </Card>
             
-            <Card className="flex-1 group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
-              <CardContent className="p-8 text-center">
-                <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
-                  <User className="h-10 w-10 text-primary" />
+            <Card style={{ 
+              flex: '1 1 300px',
+              minWidth: '300px',
+              transition: 'all 0.3s ease',
+              backgroundColor: 'hsl(var(--card))',
+              border: '1px solid hsl(var(--border))'
+            }} 
+            className="group hover:shadow-xl hover:border-primary/30">
+              <CardContent style={{ padding: '32px', textAlign: 'center' }}>
+                <div style={{ 
+                  width: '80px', 
+                  height: '80px', 
+                  backgroundColor: 'hsl(var(--primary) / 0.05)',
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  margin: '0 auto 24px auto',
+                  border: '1px solid hsl(var(--primary) / 0.1)',
+                  transition: 'background-color 0.3s ease'
+                }}>
+                  <User style={{ width: '40px', height: '40px', color: 'hsl(var(--primary))' }} />
                 </div>
-                <h3 className="text-4xl font-bold mb-3 text-foreground">{users.filter(u => !u.is_superuser).length}</h3>
-                <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Regular Users</p>
+                <h3 style={{ 
+                  fontSize: '2.5rem', 
+                  fontWeight: 'bold', 
+                  margin: '0 0 12px 0',
+                  color: 'hsl(var(--foreground))'
+                }}>
+                  {users.filter(u => !u.is_superuser).length}
+                </h3>
+                <p style={{ 
+                  color: 'hsl(var(--muted-foreground))', 
+                  fontWeight: '500',
+                  fontSize: '0.875rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  margin: '0'
+                }}>
+                  Regular Users
+                </p>
               </CardContent>
             </Card>
           </div>
