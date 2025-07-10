@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:8000/api/';
+export const BASE_URL = 'https://api.sensia.asadjanjua.com/api/';
 
 export const PAGES = [
   { id: 1, name: 'Products List', path: '/pages/products' },
