@@ -77,87 +77,89 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="container-fluid px-6 py-8">
-      {/* Header Section */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">Sensia Systems</h1>
-          <p className="text-muted-foreground text-lg">Welcome back, {user?.email}</p>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
+          <div className="space-y-2">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground">Sensia Systems</h1>
+            <p className="text-muted-foreground text-lg">Welcome back, {user?.email}</p>
+          </div>
+          <Button
+            onClick={handleCreateUser}
+            size="lg"
+            className="gap-2 w-fit"
+          >
+            <Plus className="h-5 w-5" />
+            Add New User
+          </Button>
         </div>
-        <Button
-          onClick={handleCreateUser}
-          size="lg"
-          className="gap-2"
-        >
-          <Plus className="h-5 w-5" />
-          Add New User
-        </Button>
+
+        {error && (
+          <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg mb-6">
+            {error}
+          </div>
+        )}
+
+        {/* Statistics Cards - Force single row layout */}
+        <div className="mb-12">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            <Card className="flex-1 group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
+              <CardContent className="p-8 text-center">
+                <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
+                  <Users className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-4xl font-bold mb-3 text-foreground">{users.length}</h3>
+                <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Total Users</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="flex-1 group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
+              <CardContent className="p-8 text-center">
+                <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
+                  <Shield className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-4xl font-bold mb-3 text-foreground">{users.filter(u => u.is_superuser).length}</h3>
+                <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Super Admins</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="flex-1 group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
+              <CardContent className="p-8 text-center">
+                <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
+                  <User className="h-10 w-10 text-primary" />
+                </div>
+                <h3 className="text-4xl font-bold mb-3 text-foreground">{users.filter(u => !u.is_superuser).length}</h3>
+                <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Regular Users</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* User Role Table */}
+        <Card className="shadow-sm">
+          <div className="border-b border-border px-6 py-4">
+            <h5 className="text-lg font-semibold text-foreground">User Permissions & Management</h5>
+          </div>
+          <div className="p-0">
+            <UserRoleTable
+              users={users}
+              onEditUser={handleEditUser}
+              onDeleteUser={handleDeleteUser}
+              onRefresh={fetchUsers}
+            />
+          </div>
+        </Card>
+
+        {/* Right Side Panel */}
+        <RightSidePanel
+          show={showPanel}
+          mode={panelMode}
+          user={selectedUser}
+          onClose={handleClosePanel}
+          onUserUpdated={handleUserUpdated}
+        />
       </div>
-
-      {error && (
-        <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-lg mb-6">
-          {error}
-        </div>
-      )}
-
-      {/* Statistics Cards */}
-      <div className="mb-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <Card className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
-            <CardContent className="p-8 text-center">
-              <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
-                <Users className="h-10 w-10 text-primary" />
-              </div>
-              <h3 className="text-4xl font-bold mb-3 text-foreground">{users.length}</h3>
-              <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Total Users</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
-            <CardContent className="p-8 text-center">
-              <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
-                <Shield className="h-10 w-10 text-primary" />
-              </div>
-              <h3 className="text-4xl font-bold mb-3 text-foreground">{users.filter(u => u.is_superuser).length}</h3>
-              <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Super Admins</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="group hover:shadow-xl transition-all duration-300 border hover:border-primary/30 bg-card">
-            <CardContent className="p-8 text-center">
-              <div className="mx-auto w-20 h-20 bg-primary/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors border border-primary/10">
-                <User className="h-10 w-10 text-primary" />
-              </div>
-              <h3 className="text-4xl font-bold mb-3 text-foreground">{users.filter(u => !u.is_superuser).length}</h3>
-              <p className="text-muted-foreground font-medium text-sm uppercase tracking-wide">Regular Users</p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      {/* User Role Table */}
-      <div className="bg-card border border-border rounded-xl shadow-sm">
-        <div className="border-b border-border px-6 py-4">
-          <h5 className="text-lg font-semibold text-foreground">User Permissions & Management</h5>
-        </div>
-        <div className="p-0">
-          <UserRoleTable
-            users={users}
-            onEditUser={handleEditUser}
-            onDeleteUser={handleDeleteUser}
-            onRefresh={fetchUsers}
-          />
-        </div>
-      </div>
-
-      {/* Right Side Panel */}
-      <RightSidePanel
-        show={showPanel}
-        mode={panelMode}
-        user={selectedUser}
-        onClose={handleClosePanel}
-        onUserUpdated={handleUserUpdated}
-      />
     </div>
   );
 };
