@@ -17,20 +17,42 @@ const Profile = () => {
     confirm_password: ''
   });
   const [loading, setLoading] = useState(false);
+  const [profileLoading, setProfileLoading] = useState(true);
   const [passwordLoading, setPasswordLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
 
+  // Fetch complete profile data
   useEffect(() => {
-    if (user) {
-      setFormData({
-        username: user.username || '',
-        first_name: user.first_name || '',
-        last_name: user.last_name || ''
-      });
-    }
+    const fetchProfile = async () => {
+      if (!user?.id) return;
+      
+      try {
+        setProfileLoading(true);
+        const response = await profileAPI.getProfile(user.id);
+        const profileData = response.data;
+        
+        setFormData({
+          username: profileData.username || user.username || '',
+          first_name: profileData.first_name || '',
+          last_name: profileData.last_name || ''
+        });
+      } catch (error) {
+        console.error('Failed to fetch profile:', error);
+        // Fallback to user data from auth context
+        setFormData({
+          username: user.username || '',
+          first_name: user.first_name || '',
+          last_name: user.last_name || ''
+        });
+      } finally {
+        setProfileLoading(false);
+      }
+    };
+
+    fetchProfile();
   }, [user]);
 
   const handleInputChange = (e) => {
@@ -143,6 +165,28 @@ const Profile = () => {
       </span>
     );
   };
+
+  if (profileLoading) {
+    return (
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <div className="card border-0 shadow-sm">
+              <div className="card-header bg-white border-bottom">
+                <h4 className="mb-0">Profile Settings</h4>
+              </div>
+              <div className="card-body text-center">
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading profile...</span>
+                </div>
+                <p className="mt-2">Loading profile data...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container">
